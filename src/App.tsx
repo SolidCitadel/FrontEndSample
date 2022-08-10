@@ -1,21 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './App.css';
-import axios from "axios";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import Home from "./pages/Home";
+import Community from "./pages/community/Community";
 
 function App() {
-  const [text, setText] = useState('');
 
-  useEffect(()=>{
-    axios
-      .get<string>('http://localhost:8080/hello')
-      .then(value => setText(value.data))
-      .catch(() => setText("Nothing Responses"))
-  }, []);
 
   return (
-    <div className="App">
-      {text}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/community/*" element={<Community />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
